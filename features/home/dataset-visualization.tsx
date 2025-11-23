@@ -101,7 +101,6 @@ export function DatasetVisualization({
                     dataKey="value"
                     background
                     cornerRadius={14}
-                    clockWise
                   >
                     {datasets.regions.map((entry) => (
                       <Cell key={entry.name} fill={entry.fill} />
