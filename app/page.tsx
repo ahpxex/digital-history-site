@@ -14,7 +14,9 @@ export default function HomePage() {
 
   return (
     <>
-      <AnnouncementBar {...content.announcement} />
+      {content.announcement ? (
+        <AnnouncementBar {...content.announcement} />
+      ) : null}
       <HeroSection hero={content.hero} />
       <StatsGrid stats={content.stats} />
       <FeaturedCases

@@ -26,6 +26,12 @@ export function ToolsShowcase({ tools, title, subtitle }: Props) {
               key={tool.id}
               className="flex flex-col gap-4 rounded-3xl border border-border/70 bg-gradient-to-b from-muted/40 p-6 shadow-sm"
             >
+              <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                <span className="rounded-full bg-muted px-3 py-1 text-[0.7rem] font-semibold tracking-[0.2em] text-primary">
+                  {tool.badge}
+                </span>
+                <span className="text-xs text-muted-foreground">{tool.duration}</span>
+              </div>
               <h3 className="text-2xl font-semibold text-foreground">
                 {tool.title}
               </h3>
@@ -40,9 +46,10 @@ export function ToolsShowcase({ tools, title, subtitle }: Props) {
               </ul>
               <Link
                 href={tool.link}
-                className="mt-auto text-sm font-medium text-primary underline-offset-4 hover:underline"
+                className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary underline-offset-4 hover:underline"
               >
-                {tool.link}
+                查看工具流程
+                <CheckCircle2Icon className="size-4" />
               </Link>
             </article>
           ))}

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -14,6 +13,8 @@ type HeroProps = {
     videoSrc: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    ctaPrimaryHref: string;
+    ctaSecondaryHref: string;
     highlights: {
       label: string;
       value: number;
@@ -23,45 +24,31 @@ type HeroProps = {
 };
 
 export function HeroSection({ hero }: HeroProps) {
-
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden py-16 sm:py-24 lg:py-32"
+      className="relative isolate flex min-h-screen items-center overflow-hidden bg-white py-16 sm:py-24 lg:py-32"
     >
-      <motion.video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover"
-        initial={{ scale: 1.05 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2 }}
-      >
-        <source src={hero.videoSrc} type="video/mp4" />
-      </motion.video>
-      <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/80 to-background"></div>
-      <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-10 px-4 text-white lg:flex-row lg:items-center lg:justify-between lg:px-6">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 text-slate-900 lg:flex-row lg:items-center lg:justify-between lg:px-6">
         <div className="max-w-2xl space-y-6 text-balance">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/40 px-3 py-1 text-xs uppercase tracking-[0.3em]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-900/20 px-3 py-1 text-xs uppercase tracking-[0.3em] text-slate-600">
             {hero.badge}
           </span>
-          <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">
+          <h1 className="text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl">
             {hero.title}
           </h1>
-          <p className="text-lg text-white/80">{hero.description}</p>
-          <div className="flex flex-wrap gap-4 text-white/90">
+          <p className="text-lg text-slate-600">{hero.description}</p>
+          <div className="flex flex-wrap gap-4 text-slate-900">
             <Link
-              href="/search/results"
-              className="inline-flex items-center gap-2 rounded-full border border-white/60 px-5 py-3 text-sm font-semibold"
+              href={hero.ctaPrimaryHref}
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20"
             >
               {hero.ctaPrimary}
               <ArrowUpRightIcon className="size-4" />
             </Link>
             <Link
-              href="/search/advanced"
-              className="inline-flex items-center gap-2 rounded-full bg-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/30"
+              href={hero.ctaSecondaryHref}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-900/20 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm"
             >
               {hero.ctaSecondary}
             </Link>
@@ -69,7 +56,7 @@ export function HeroSection({ hero }: HeroProps) {
         </div>
         <div className="w-full max-w-md space-y-4">
           <QuickSearchForm />
-          <div className="grid grid-cols-3 gap-4 rounded-2xl border border-white/30 bg-white/10 p-4 text-center text-white/90 backdrop-blur">
+          <div className="grid grid-cols-3 gap-4 rounded-2xl border border-slate-900/10 bg-white/90 p-4 text-center text-slate-900 shadow-lg shadow-slate-900/5">
             {hero.highlights.map((item) => (
               <div key={item.label}>
                 <p className="text-3xl font-bold">

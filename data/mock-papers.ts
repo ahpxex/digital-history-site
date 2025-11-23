@@ -10,7 +10,7 @@ export const mockPapers: Paper[] = [
     theme: "urban-memory",
     abstract:
       "整合 40 余个开放数据源，构建上海城市影像与口述史的跨媒介知识图谱，支持语义检索与展陈。",
-    source: "https://digital-history.example.com/cases/shanghai-memory",
+    source: "/cases/shanghai-memory",
     doi: "10.1234/dh.2024.001",
   },
   {
@@ -22,7 +22,7 @@ export const mockPapers: Paper[] = [
     theme: "marine-ecology",
     abstract:
       "基于 18-19 世纪航海日志与遥感数据，重建捕鲸活动路线，揭示生态影响与贸易网络。",
-    source: "https://digital-history.example.com/cases/atlantic-whale",
+    source: "/cases/atlantic-whale-network",
   },
   {
     id: "dh-003",
@@ -33,7 +33,7 @@ export const mockPapers: Paper[] = [
     theme: "climate-history",
     abstract:
       "通过跨语种口述史与 AI 转录工具，记录不同社区对极端气候事件的记忆与行动。",
-    source: "https://digital-history.example.com/cases/climate-voices",
+    source: "/cases/climate-voices",
   },
   {
     id: "dh-004",

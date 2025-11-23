@@ -1,13 +1,14 @@
 "use client";
 
 import {
+  Area,
   Bar,
-  BarChart,
   CartesianGrid,
   Cell,
-  Legend,
-  Pie,
-  PieChart,
+  ComposedChart,
+  PolarAngleAxis,
+  RadialBar,
+  RadialBarChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -31,6 +32,8 @@ export function DatasetVisualization({
   topicTitle,
   regionTitle,
 }: Props) {
+  const leadingRegion = [...datasets.regions].sort((a, b) => b.value - a.value)[0];
+  const maxRegionValue = Math.max(...datasets.regions.map((item) => item.value), 0);
 
   return (
     <section id="datasets" className="py-16">
@@ -46,7 +49,13 @@ export function DatasetVisualization({
             <h3 className="font-semibold text-foreground">{topicTitle}</h3>
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={datasets.topics}>
+                <ComposedChart data={datasets.topics}>
+                  <defs>
+                    <linearGradient id="topicArea" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.35} />
+                      <stop offset="95%" stopColor="var(--primary)" stopOpacity={0.05} />
+                    </linearGradient>
+                  </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                   <XAxis dataKey="name" stroke="var(--muted-foreground)" />
                   <YAxis stroke="var(--muted-foreground)" />
@@ -56,42 +65,72 @@ export function DatasetVisualization({
                       borderColor: "var(--border)",
                     }}
                   />
-                  <Legend />
-                  <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+                  <Area
+                    type="monotone"
+                    dataKey="value"
+                    stroke="var(--primary)"
+                    strokeWidth={2}
+                    fill="url(#topicArea)"
+                  />
+                  <Bar dataKey="value" radius={[8, 8, 0, 0]} opacity={0.85}>
                     {datasets.topics.map((entry) => (
                       <Cell key={entry.name} fill={entry.fill} />
                     ))}
                   </Bar>
-                </BarChart>
+                </ComposedChart>
               </ResponsiveContainer>
             </div>
           </div>
-          <div className="rounded-3xl border border-border/70 bg-card/80 p-6 shadow-sm">
+          <div className="relative rounded-3xl border border-border/70 bg-card/80 p-6 shadow-sm">
             <h3 className="font-semibold text-foreground">{regionTitle}</h3>
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={datasets.regions}
+                <RadialBarChart
+                  data={datasets.regions}
+                  innerRadius="25%"
+                  outerRadius="90%"
+                  startAngle={90}
+                  endAngle={-270}
+                >
+                  <PolarAngleAxis
+                    type="number"
+                    domain={[0, Math.max(50, maxRegionValue + 5)]}
+                    tick={false}
+                  />
+                  <RadialBar
                     dataKey="value"
-                    nameKey="name"
-                    outerRadius={100}
-                    label
+                    background
+                    cornerRadius={14}
+                    clockWise
                   >
                     {datasets.regions.map((entry) => (
                       <Cell key={entry.name} fill={entry.fill} />
                     ))}
-                  </Pie>
+                  </RadialBar>
                   <Tooltip
                     contentStyle={{
                       backgroundColor: "var(--card)",
                       borderColor: "var(--border)",
                     }}
                   />
-                  <Legend />
-                </PieChart>
+                </RadialBarChart>
               </ResponsiveContainer>
             </div>
+            {leadingRegion ? (
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <div className="rounded-2xl bg-background/80 px-6 py-4 text-center shadow">
+                  <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
+                    领先地区
+                  </p>
+                  <p className="text-2xl font-semibold text-foreground">
+                    {leadingRegion.name}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {leadingRegion.value} 个项目
+                  </p>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

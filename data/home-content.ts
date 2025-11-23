@@ -1,12 +1,15 @@
+import { caseStudies } from "@/data/case-studies";
+import { frontierArticles, upcomingEvents } from "@/data/news-feed";
+import { researchTools } from "@/data/research-tools";
 import type { Paper } from "@/lib/api/types";
 
 export type HomeContent = {
-  announcement: {
+  announcement?: {
     message: string;
     link: string;
     linkLabel: string;
     dismissLabel: string;
-  };
+  } | null;
   hero: {
     badge: string;
     title: string;
@@ -14,6 +17,8 @@ export type HomeContent = {
     videoSrc: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    ctaPrimaryHref: string;
+    ctaSecondaryHref: string;
     highlights: {
       label: string;
       value: number;
@@ -41,6 +46,8 @@ export type HomeContent = {
     description: string;
     steps: string[];
     link: string;
+    badge: string;
+    duration: string;
   }[];
   datasets: {
     topics: { name: string; value: number; fill: string }[];
@@ -49,13 +56,16 @@ export type HomeContent = {
   news: {
     frontier: {
       id: string;
+      slug: string;
       title: string;
       excerpt: string;
       date: string;
       link: string;
+      tags: string[];
     }[];
     events: {
       id: string;
+      slug: string;
       title: string;
       location: string;
       date: string;
@@ -114,21 +124,17 @@ const sharedRegions = [
 ];
 
 export const homeContent: HomeContent = {
-  announcement: {
-    message:
-      "2025 年度开放申请：数字史学联合孵化计划升级，新增语义标注沙箱。",
-    link: "https://digital-history.example.com/program",
-    linkLabel: "查看详情",
-    dismissLabel: "关闭公告",
-  },
+  announcement: null,
   hero: {
     badge: "全球数字史学案例数据库",
     title: "以实验驱动的数字史学案例数据库",
     description:
       "连通全球 200+ 研究团队的案例、工具、数据集与资源，支持跨语、跨区域的历史研究协作。",
     videoSrc: "https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4",
-    ctaPrimary: "开始探索",
-    ctaSecondary: "查看工具手册",
+    ctaPrimary: "探索案例",
+    ctaSecondary: "研究工具",
+    ctaPrimaryHref: "/cases",
+    ctaSecondaryHref: "/tools",
     highlights: [
       { label: "收录案例", value: 248, suffix: "+" },
       { label: "开放数据集", value: 37 },
@@ -158,109 +164,48 @@ export const homeContent: HomeContent = {
       description: "支持项目检索、数据集调用与引用分析。",
     },
   ],
-  featuredCases: [
-    {
-      id: "case-1",
-      title: "上海城市记忆图谱",
-      abstract:
-        "通过 120TB 城市影像档案与传感数据，构建 1949-2020 年城市空间记忆的互动地图。",
-      tags: ["城市史", "可视化", "GIS"],
-      region: "east-asia",
-      theme: "urban-memory",
-      year: 2024,
-      image: "/media/cases/shanghai.jpg",
-      link: "https://digital-history.example.com/cases/shanghai-memory",
-    },
-    {
-      id: "case-2",
-      title: "北大西洋捕鲸网络",
-      abstract:
-        "利用船日志与卫星遥感揭示 18-19 世纪捕鲸网络与生态冲击，结合物联网传感器复原航路。",
-      tags: ["海洋史", "知识图谱"],
-      region: "europe",
-      theme: "marine-ecology",
-      year: 2023,
-      image: "/media/cases/whale.jpg",
-      link: "https://digital-history.example.com/cases/atlantic-whale",
-    },
-    {
-      id: "case-3",
-      title: "气候史记忆碎片",
-      abstract:
-        "通过多语种口述资料与 AI 转录工具，追踪全球气候事件的在地叙事及政策响应。",
-      tags: ["口述史", "AI"],
-      region: "global",
-      theme: "climate-history",
-      year: 2025,
-      image: "/media/cases/climate.jpg",
-      link: "https://digital-history.example.com/cases/climate-voices",
-    },
-  ],
-  tools: [
-    {
-      id: "pipeline",
-      title: "语义标注流水线",
-      description:
-        "封装 OCR、实体抽取、语义角色标注与人工校验流程，适配档案批量处理。",
-      steps: ["OCR 转写", "实体校验", "语义索引", "开放 API 发布"],
-      link: "https://digital-history.example.com/tools/semantic",
-    },
-    {
-      id: "timeline",
-      title: "多线索历史时间轴",
-      description:
-        "结合图数据库与流式渲染，实现多角色、多地理坐标的叙事时间轴。",
-      steps: ["资料汇聚", "知识图谱", "流式渲染", "协作发布"],
-      link: "https://digital-history.example.com/tools/timeline",
-    },
-    {
-      id: "audit",
-      title: "数据可信度审计",
-      description:
-        "通过可追踪的数据指纹与版本快照，降低数据引用过程中的信任成本。",
-      steps: ["样本抽检", "偏差分析", "溯源输出"],
-      link: "https://digital-history.example.com/tools/trust",
-    },
-  ],
+  featuredCases: caseStudies.slice(0, 3).map((item) => ({
+    id: item.slug,
+    title: item.title,
+    abstract: item.summary,
+    tags: item.tags,
+    region: item.region,
+    theme: item.theme,
+    year: item.year,
+    image: item.heroImage,
+    link: "/cases/" + item.slug,
+  })),
+  tools: researchTools.map((tool) => ({
+    id: tool.slug,
+    title: tool.title,
+    description: tool.summary,
+    steps: tool.steps.map((step) => step.title),
+    link: "/tools/" + tool.slug,
+    badge: tool.complexity,
+    duration: tool.duration,
+  })),
   datasets: {
     topics: sharedTopics,
     regions: sharedRegions,
   },
   news: {
-    frontier: [
-      {
-        id: "frontier-1",
-        title: "生成式 AI 被用于多语口述史噪声修复",
-        excerpt:
-          "MIT 与伦敦政经联合团队开源跨语音噪声数据集并分享标注策略。",
-        date: "2025-03-02",
-        link: "https://digital-history.example.com/news/ai-oral-history",
-      },
-      {
-        id: "frontier-2",
-        title: "元宇宙考古实验室上线可交互展厅",
-        excerpt:
-          "通过实时点云拼接呈现地中海沉船现场，并支持研究者标注。",
-        date: "2025-02-18",
-        link: "https://digital-history.example.com/news/metaverse-archaeology",
-      },
-    ],
-    events: [
-      {
-        id: "event-1",
-        title: "Digital Humanities Asia 2025",
-        location: "新加坡",
-        date: "2025-05-12",
-        link: "https://dha2025.org",
-      },
-      {
-        id: "event-2",
-        title: "全球口述史与 AI 峰会",
-        location: "蒙特利尔",
-        date: "2025-06-03",
-        link: "https://oralhistory-ai.org",
-      },
-    ],
+    frontier: frontierArticles.map((article) => ({
+      id: article.slug,
+      slug: article.slug,
+      title: article.title,
+      excerpt: article.excerpt,
+      date: article.date,
+      link: "/news/" + article.slug,
+      tags: article.tags,
+    })),
+    events: upcomingEvents.map((event) => ({
+      id: event.slug,
+      slug: event.slug,
+      title: event.title,
+      location: event.location,
+      date: event.date,
+      link: "/events/" + event.slug,
+    })),
   },
   partners: [
     {

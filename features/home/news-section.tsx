@@ -41,6 +41,16 @@ export function NewsSection({
                   {item.title}
                 </h3>
                 <p className="text-sm text-muted-foreground">{item.excerpt}</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-primary/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-primary"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
                 <Link
                   href={item.link}
                   className="mt-3 inline-flex items-center gap-1 text-sm text-primary"

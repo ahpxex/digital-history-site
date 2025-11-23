@@ -25,9 +25,9 @@ export function SiteFooter() {
             </a>
           </div>
           <div className="flex items-center gap-6 text-xs uppercase tracking-[0.35em] text-muted-foreground">
-            <Link href="#datasets">DATASETS</Link>
-            <Link href="#tools">TOOLKIT</Link>
-            <Link href="#news">NEWS</Link>
+            <Link href="/cases">CASES</Link>
+            <Link href="/tools">TOOLKIT</Link>
+            <Link href="/news">NEWS</Link>
           </div>
         </div>
         <Separator />

@@ -5,10 +5,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const anchorNav = [
+const navItems = [
+  { label: "案例库", href: "/cases" },
+  { label: "研究工具", href: "/tools" },
+  { label: "资讯", href: "/news" },
   { label: "数据集", href: "#datasets" },
-  { label: "研究工具", href: "#tools" },
-  { label: "资讯", href: "#news" },
   { label: "合作伙伴", href: "#partners" },
 ];
 
@@ -28,17 +29,32 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
-          {anchorNav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "text-muted-foreground transition-colors hover:text-foreground"
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            if (item.href.startsWith("#")) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "text-muted-foreground transition-colors hover:text-foreground"
+                  )}
+                >
+                  {item.label}
+                </a>
+              );
+            }
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "text-muted-foreground transition-colors hover:text-foreground"
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <Link
             href="/search/advanced"
             className="text-muted-foreground transition-colors hover:text-foreground"
