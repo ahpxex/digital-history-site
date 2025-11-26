@@ -3,15 +3,7 @@
 import { Alert } from "@heroui/alert";
 import { Button } from "@heroui/button";
 import { Card, CardBody } from "@heroui/card";
-import { Checkbox } from "@heroui/checkbox";
 import { Input } from "@heroui/input";
-import { Link } from "@heroui/link";
-import {
-  Eye,
-  EyeSlash,
-  GithubLogoIcon,
-  GoogleLogoIcon,
-} from "@phosphor-icons/react/dist/ssr";
 import { useLogin } from "@refinedev/core";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -28,9 +20,7 @@ export default function LoginPage() {
   const { mutateAsync: login, isPending: isLoading } = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<LoginErrors>({});
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const resetErrors = (...keys: (keyof LoginErrors)[]) => {
     setErrors((prev) => {
@@ -68,7 +58,6 @@ export default function LoginPage() {
       const response = await login({
         email,
         password,
-        remember: rememberMe,
       });
 
       if (response?.success === false) {
@@ -92,15 +81,13 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="flex flex-col space-y-2 justify-center items-center">
-        <h1 className="text-4xl font-bold">Welcome Back</h1>
-        <div className="flex space-x-1">
-          <p className="text-gray-600">Sign in to your account, or</p>
-          <Link href={"/register"} underline="always">
-            sign up here
-          </Link>
-          <p>.</p>
-        </div>
+      <div className="flex flex-col space-y-2 justify-center items-center text-center">
+        <h1 className="text-4xl font-bold">Administrator Login</h1>
+        <p className="text-gray-600 max-w-md text-balance">
+          This dashboard is restricted to a single administrator account. Update
+          the <code>ADMIN_EMAIL</code> and <code>ADMIN_PASSWORD</code>{" "}
+          environment variables to customize the credentials.
+        </p>
       </div>
       <Card className="w-full max-w-md">
         <CardBody className="space-y-4">
@@ -128,7 +115,7 @@ export default function LoginPage() {
             />
             <Input
               isRequired
-              type={isPasswordVisible ? "text" : "password"}
+              type="password"
               label="Password"
               placeholder="Enter your password"
               value={password}
@@ -138,37 +125,7 @@ export default function LoginPage() {
               }}
               isInvalid={!!errors.password}
               errorMessage={errors.password}
-              endContent={
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="light"
-                  isIconOnly
-                  aria-label={
-                    isPasswordVisible ? "Hide password" : "Show password"
-                  }
-                  onPress={() => setIsPasswordVisible((prev) => !prev)}
-                >
-                  {isPasswordVisible ? (
-                    <EyeSlash className="h-5 w-5" weight="bold" />
-                  ) : (
-                    <Eye className="h-5 w-5" weight="bold" />
-                  )}
-                </Button>
-              }
             />
-            <div className="flex items-center justify-between">
-              <Checkbox
-                isSelected={rememberMe}
-                onValueChange={setRememberMe}
-                size="sm"
-              >
-                Remember me
-              </Checkbox>
-              <Link href="/forgot-password" size="sm" className="text-primary">
-                Forgot password?
-              </Link>
-            </div>
             <Button
               type="submit"
               color="primary"
@@ -179,24 +136,6 @@ export default function LoginPage() {
               Sign In
             </Button>
           </form>
-          <div className="relative mb-4">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">
-                Or continue with
-              </span>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <Button variant="bordered" startContent={<GoogleLogoIcon />}>
-              Google
-            </Button>
-            <Button variant="bordered" startContent={<GithubLogoIcon />}>
-              GitHub
-            </Button>
-          </div>
         </CardBody>
       </Card>
     </>

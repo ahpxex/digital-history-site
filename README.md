@@ -94,7 +94,7 @@ This is a modern Next.js 15 application built with:
 open-saas-next/
 ├── src/
 │   ├── app/              # Next.js App Router pages and layouts
-│   │   ├── (auth)/       # Authentication pages (login, register)
+│   │   ├── (auth)/       # Administrator login route
 │   │   ├── (dashboard)/  # Dashboard pages with shared layout
 │   │   └── api/          # API routes
 │   ├── components/       # Reusable UI components
@@ -127,6 +127,25 @@ The template includes several example pages demonstrating common patterns:
 - **Rich Cell** - Table with custom cell rendering (progress bars, avatars, etc.)
 - **Product Management** - Full CRUD example
 - **Settings** - User settings page
+
+## Authentication
+
+The template intentionally keeps authentication simple: only a single administrator
+account can access the dashboard via `/login`. Self-service registration, password
+reset, and social login flows have been removed to reduce complexity.
+
+### Configure administrator credentials
+
+Set the credentials through environment variables (e.g. in a `.env` file):
+
+```
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=changeme123
+ADMIN_NAME=Administrator
+```
+
+If you omit these variables the defaults above are used. Update them before
+deploying so only your chosen admin can sign in.
 
 ## Customization
 

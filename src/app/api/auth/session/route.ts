@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { getAdminUser, validateAdminCredentials } from "@/lib/auth/admin";
 import {
   decodeSession,
   encodeSession,
@@ -18,17 +19,29 @@ export async function GET() {
   return NextResponse.json(user ? { user } : {}, { status: 200 });
 }
 
-export async function POST(request: NextRequest) {
-  const body = (await request.json()) as SessionUser | null;
+type SessionPayload = {
+  email?: string;
+  password?: string;
+};
 
-  if (!body?.email) {
-    return NextResponse.json({ message: "Email is required" }, { status: 400 });
+export async function POST(request: NextRequest) {
+  const body = (await request.json()) as SessionPayload | null;
+
+  if (!body?.email || !body.password) {
+    return NextResponse.json(
+      { message: "Email and password are required" },
+      { status: 400 },
+    );
   }
 
-  const user: SessionUser = {
-    email: body.email,
-    name: body.name,
-  };
+  if (!validateAdminCredentials(body.email, body.password)) {
+    return NextResponse.json(
+      { message: "Invalid administrator credentials" },
+      { status: 401 },
+    );
+  }
+
+  const user: SessionUser = getAdminUser();
 
   const response = NextResponse.json({ user }, { status: 200 });
 

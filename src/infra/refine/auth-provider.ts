@@ -7,6 +7,11 @@ export interface SessionUser {
   name?: string;
 }
 
+type SessionCredentials = {
+  email: string;
+  password: string;
+};
+
 const SESSION_ENDPOINT = "/api/auth/session";
 
 async function readSession(): Promise<SessionUser | null> {
@@ -23,13 +28,15 @@ async function readSession(): Promise<SessionUser | null> {
   return data?.user ?? null;
 }
 
-async function createSession(user: SessionUser): Promise<SessionUser> {
+async function createSession(
+  credentials: SessionCredentials,
+): Promise<SessionUser> {
   const response = await fetch(SESSION_ENDPOINT, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(credentials),
     credentials: "include",
   });
 
@@ -41,7 +48,15 @@ async function createSession(user: SessionUser): Promise<SessionUser> {
     );
   }
 
-  return user;
+  const data = (await response.json().catch(() => ({}))) as
+    | { user?: SessionUser }
+    | undefined;
+
+  if (!data?.user) {
+    throw new Error("Unable to create session. Please try again.");
+  }
+
+  return data.user;
 }
 
 async function clearSession(): Promise<void> {
@@ -52,18 +67,18 @@ async function clearSession(): Promise<void> {
 }
 
 export const authProvider: AuthProvider = {
-  login: async ({ email, name }: { email?: string; name?: string }) => {
-    if (!email) {
+  login: async ({ email, password }: { email?: string; password?: string }) => {
+    if (!email || !password) {
       return {
         success: false,
         error: {
           name: "LoginError",
-          message: "Email is required",
+          message: "Email and password are required",
         },
       };
     }
 
-    await createSession({ email, name });
+    await createSession({ email, password });
 
     return {
       success: true,
@@ -71,22 +86,13 @@ export const authProvider: AuthProvider = {
     };
   },
 
-  register: async ({ email, name }: { email?: string; name?: string }) => {
-    if (!email) {
-      return {
-        success: false,
-        error: {
-          name: "RegisterError",
-          message: "Email is required",
-        },
-      };
-    }
-
-    return {
-      success: true,
-      redirectTo: "/login",
-    };
-  },
+  register: async () => ({
+    success: false,
+    error: {
+      name: "RegisterError",
+      message: "Registration is disabled",
+    },
+  }),
 
   logout: async () => {
     await clearSession();
