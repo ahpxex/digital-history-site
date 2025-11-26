@@ -69,11 +69,7 @@ export const selectablesColumns: ColumnDef<SelectableProduct>[] = [
   },
   {
     accessorKey: "lastRestocked",
-    header: () => (
-      <div className="flex items-center gap-1">
-        Last Restocked
-      </div>
-    ),
+    header: () => <div className="flex items-center gap-1">Last Restocked</div>,
     cell: (info) => (
       <span className="text-gray-600 dark:text-gray-400">
         {info.getValue() as string}

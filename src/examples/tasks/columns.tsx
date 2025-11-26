@@ -39,7 +39,11 @@ export function createTasksColumns(
       header: "Assignee",
       cell: (info) => (
         <div className="flex items-center gap-2 min-w-0">
-          <Avatar size="sm" src={info.row.original.avatar} className="shrink-0" />
+          <Avatar
+            size="sm"
+            src={info.row.original.avatar}
+            className="shrink-0"
+          />
           <span className="text-gray-700 dark:text-gray-300 truncate">
             {info.getValue() as string}
           </span>

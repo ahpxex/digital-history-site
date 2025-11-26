@@ -10,9 +10,7 @@ import {
   DropdownTrigger,
   Spinner,
 } from "@heroui/react";
-import {
-  SignOutIcon,
-} from "@phosphor-icons/react/dist/ssr";
+import { SignOutIcon } from "@phosphor-icons/react/dist/ssr";
 import { useGetIdentity, useLogout } from "@refinedev/core";
 import { useRouter } from "next/navigation";
 import type { Key } from "react";

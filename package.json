@@ -9,15 +9,23 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
-    "create-page": "bun run scripts/create-page.ts"
+    "create-page": "bun run scripts/create-page.ts",
+    "db:generate": "bunx prisma generate",
+    "db:migrate": "mkdir -p data && bunx prisma migrate deploy",
+    "db:push": "mkdir -p data && bunx prisma db push",
+    "db:seed": "mkdir -p data && bunx prisma db seed",
+    "db:setup": "bun run db:generate && bun run db:push && bun run db:seed"
   },
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
     "@heroui/react": "^2.8.4",
     "@phosphor-icons/react": "^2.1.10",
+    "@prisma/client": "6.19.0",
     "@refinedev/core": "^5.0.6",
     "@refinedev/nextjs-router": "^7.0.4",
     "@tanstack/react-table": "^8.21.3",
+    "@trpc/client": "11.7.2",
+    "@trpc/server": "11.7.2",
     "cmdk": "^1.1.1",
     "framer-motion": "^12.23.22",
     "next": "15.5.4",
@@ -33,7 +41,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "prisma": "6.19.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "bun --bun prisma/seed.ts"
   }
 }
