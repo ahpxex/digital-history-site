@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ==========================================
+// 1. 核心论文库 (Core Paper Library)
+// ==========================================
+// 对应首页搜索框的数据源
+model Paper {
+  id                Int      @id @default(autoincrement())
+  
+  // 基础信息
+  docTitle          String   // 题目 (doc_Title)
+  author            String?  // 作者 (author)
+  authorAffiliation String?  // 机构 (author_Affiliation)
+  
+  // 内容详情
+  docAbstract       String?  // 摘要 (doc_Abstract) - SQLite中String可以存长文本
+  docKeywords       String?  // 关键词 (doc_Keywords)
+  topic             String?  // 主题 (topic)
+  
+  // 技术维度 (数字史学特色字段)
+  methods           String?  // 方法 (methods)
+  tools             String?  // 工具 (tools)
+  
+  // 出版信息
+  sourcePublisher   String?  // 来源/期刊名 (source_Publisher)
+  sourceLevel       String?  // 期刊等级 (source_Level)
+  timePublished     String?  // 出版时间 (time_Published) - 用String兼容性更好，如 "2023", "2023-05"
+  
+  // 管理信息
+  worker            String?  // 整理人 (worker)
+  
+  // 系统字段
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // 索引优化：为常用的搜索字段建立索引，加快检索速度
+  @@index([docTitle])
+  @@index([author])
+  @@index([docKeywords])
+}
+
+// ... (以下是之前定义的 FeaturedCase, ResearchTool 等其他表，保持不变)
+// 2. 精选案例
+model FeaturedCase {
+  id          Int      @id @default(autoincrement())
+  title       String
+  type        String
+  description String
+  tags        String
+  url         String
+  institution String
+  sortOrder   Int      @default(0)
+}
+
+// 3. 研究工具
+model ResearchTool {
+  id          Int      @id @default(autoincrement())
+  name        String
+  category    String
+  description String
+  developer   String?
+  url         String?
+}
+
+// 4. 数据集
+model DatasetItem {
+  id          Int      @id @default(autoincrement())
+  title       String
+  type        String
+  description String
+  tags        String
+  url         String
+  institution String
+}
+
+model DatasetChartData {
+  id        Int    @id @default(autoincrement())
+  chartType String
+  label     String
+  value     Int
+}
+
+// 5. 发展动态
+model DynamicNews {
+  id          Int      @id @default(autoincrement())
+  title       String
+  issue       String?
+  coverUrl    String?
+  description String
+  link        String?
+  publishDate DateTime @default(now())
+}
+
+// 6. 合作机构
+model Partner {
+  id        Int     @id @default(autoincrement())
+  name      String
+  logoUrl   String
+  websiteUrl String
+}
