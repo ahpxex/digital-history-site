@@ -12,7 +12,15 @@ const partnerSortFields = ["name"] as const;
 
 const partnerBaseInput = z.object({
   name: z.string().trim().min(1).max(255),
-  logoUrl: z.string().trim().url(),
+  logoUrl: z.string().trim().refine((val) => {
+    // Accept either a valid URL or a relative path starting with /
+    try {
+      new URL(val);
+      return true;
+    } catch {
+      return val.startsWith("/");
+    }
+  }, { message: "Must be a valid URL or a relative path starting with /" }),
   websiteUrl: z.string().trim().url(),
 });
 

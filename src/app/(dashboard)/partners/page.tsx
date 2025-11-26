@@ -22,13 +22,23 @@ import {
 
 const partnerFields: FieldConfig[] = [
   { name: "name", label: "名称", required: true },
-  { name: "logoUrl", label: "Logo URL", type: "url", required: true },
+  {
+    name: "logoFile",
+    label: "Logo 图片",
+    type: "file",
+    accept: "image/*",
+    uploadFieldName: "logoUrl",
+    description: "上传 Logo 图片文件（JPEG, PNG, WebP, GIF，最大 5MB）",
+  },
+  { name: "logoUrl", label: "Logo URL", type: "url", description: "或直接输入图片 URL" },
   { name: "websiteUrl", label: "网站URL", type: "url", required: true },
 ];
 
 const sanitizeValues = (values: Record<string, any>) =>
   Object.fromEntries(
-    Object.entries(values).filter(([, value]) => value !== undefined),
+    Object.entries(values).filter(
+      ([key, value]) => value !== undefined && key !== "logoFile"
+    ),
   );
 
 export default function PartnersPage() {
