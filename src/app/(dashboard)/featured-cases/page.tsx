@@ -21,25 +21,25 @@ import {
 } from "@/infra/table";
 
 const caseFields: FieldConfig[] = [
-  { name: "title", label: "Title", required: true },
-  { name: "type", label: "Type", required: true },
+  { name: "title", label: "标题", required: true },
+  { name: "type", label: "类型", required: true },
   {
     name: "description",
-    label: "Description",
+    label: "描述",
     type: "textarea",
     required: true,
   },
   {
     name: "tags",
-    label: "Tags",
+    label: "标签",
     required: true,
-    description: "Use commas to separate tags",
+    description: "用逗号分隔标签",
   },
   { name: "url", label: "URL", type: "url", required: true },
-  { name: "institution", label: "Institution", required: true },
+  { name: "institution", label: "机构", required: true },
   {
     name: "sortOrder",
-    label: "Sort Order",
+    label: "排序",
     type: "number",
     required: true,
   },

@@ -13,7 +13,7 @@ export function createDatasetChartDataColumns(
   return [
     {
       accessorKey: "chartType",
-      header: "Chart Type",
+      header: "图表类型",
       cell: (info) => (
         <span className="text-sm font-medium text-gray-800 dark:text-gray-100">
           {info.getValue() as string}
@@ -22,7 +22,7 @@ export function createDatasetChartDataColumns(
     },
     {
       accessorKey: "label",
-      header: "Label",
+      header: "标签",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
           {info.getValue() as string}
@@ -31,7 +31,7 @@ export function createDatasetChartDataColumns(
     },
     {
       accessorKey: "value",
-      header: "Value",
+      header: "值",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
           {info.getValue<number>()}
@@ -40,7 +40,7 @@ export function createDatasetChartDataColumns(
     },
     {
       id: "actions",
-      header: "Actions",
+      header: "操作",
       cell: (info) => {
         const record = info.row.original;
         return (

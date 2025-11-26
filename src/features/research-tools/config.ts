@@ -20,17 +20,17 @@ export function createResearchToolsConfig(
     filters: [
       {
         key: "category",
-        label: "Category",
-        placeholder: "All categories",
+        label: "分类",
+        placeholder: "所有分类",
         options: [
-          { key: "Data Prep", label: "Data Prep" },
-          { key: "Annotation", label: "Annotation" },
-          { key: "Visualization", label: "Visualization" },
+          { key: "Data Prep", label: "数据准备" },
+          { key: "Annotation", label: "标注" },
+          { key: "Visualization", label: "可视化" },
         ],
       },
     ],
     enableSearch: true,
-    searchPlaceholder: "Search tools...",
+    searchPlaceholder: "搜索工具...",
     defaultPageSize: 10,
     pageSizeOptions: [10, 20, 50],
   };

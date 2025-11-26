@@ -81,7 +81,7 @@ export function EntityFormModal({
   initialValues,
   onSubmit,
   isSubmitting = false,
-  primaryActionLabel = "Save",
+  primaryActionLabel = "保存",
 }: EntityFormModalProps) {
   const [values, setValues] = useState<Record<string, string>>({});
 
@@ -168,7 +168,7 @@ export function EntityFormModal({
         </ModalBody>
         <ModalFooter>
           <Button variant="light" onPress={onClose}>
-            Cancel
+            取消
           </Button>
           <Button
             color="primary"

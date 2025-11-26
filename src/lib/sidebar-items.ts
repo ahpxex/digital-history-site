@@ -15,19 +15,19 @@ export interface MenuGroup {
 
 export const mainMenuItems: MenuGroup[] = [
   {
-    groupLabel: "Digital History",
+    groupLabel: "数字历史",
     items: [
-      { label: "Papers", href: "/papers", icon: TableIcon },
-      { label: "Featured Cases", href: "/featured-cases", icon: TableIcon },
-      { label: "Research Tools", href: "/research-tools", icon: TableIcon },
-      { label: "Datasets", href: "/datasets", icon: TableIcon },
+      { label: "论文", href: "/papers", icon: TableIcon },
+      { label: "精选案例", href: "/featured-cases", icon: TableIcon },
+      { label: "研究工具", href: "/research-tools", icon: TableIcon },
+      { label: "数据集", href: "/datasets", icon: TableIcon },
       {
-        label: "Dataset Chart Data",
+        label: "数据集图表数据",
         href: "/datasets/chart-data",
         icon: TableIcon,
       },
-      { label: "Dynamic News", href: "/dynamic-news", icon: TableIcon },
-      { label: "Partners", href: "/partners", icon: TableIcon },
+      { label: "动态新闻", href: "/dynamic-news", icon: TableIcon },
+      { label: "合作伙伴", href: "/partners", icon: TableIcon },
     ],
   },
 ];

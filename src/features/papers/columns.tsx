@@ -13,27 +13,27 @@ export function createPaperColumns(
   return [
     {
       accessorKey: "docTitle",
-      header: "Title",
+      header: "标题",
       cell: (info) => (
         <div className="flex flex-col">
           <span className="font-semibold text-gray-900 dark:text-gray-100">
             {info.getValue() as string}
           </span>
           <span className="text-xs text-gray-500">
-            {(info.row.original.topic ?? "No topic").toString()}
+            {(info.row.original.topic ?? "无主题").toString()}
           </span>
         </div>
       ),
     },
     {
       accessorKey: "author",
-      header: "Author",
+      header: "作者",
       cell: (info) => {
         const author = info.getValue<string | null | undefined>();
         const affiliation = info.row.original.authorAffiliation;
         return (
           <div className="flex flex-col text-sm text-gray-600 dark:text-gray-300">
-            <span>{author ?? "Unknown"}</span>
+            <span>{author ?? "未知"}</span>
             {affiliation ? (
               <span className="text-xs text-gray-500">{affiliation}</span>
             ) : null}
@@ -43,7 +43,7 @@ export function createPaperColumns(
     },
     {
       accessorKey: "methods",
-      header: "Methods & Tools",
+      header: "方法与工具",
       cell: (info) => {
         const methods = info.getValue<string | null | undefined>();
         const tools = info.row.original.tools;
@@ -51,7 +51,7 @@ export function createPaperColumns(
           <div className="flex flex-col text-sm text-gray-600 dark:text-gray-300">
             <span>{methods ?? "—"}</span>
             <span className="text-xs text-gray-500">
-              {tools ? `Tools: ${tools}` : "Tools: —"}
+              {tools ? `工具：${tools}` : "工具：—"}
             </span>
           </div>
         );
@@ -59,30 +59,30 @@ export function createPaperColumns(
     },
     {
       accessorKey: "timePublished",
-      header: "Published",
+      header: "发布时间",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
-          {(info.getValue<string | null>() ?? "Unknown").toString()}
+          {(info.getValue<string | null>() ?? "未知").toString()}
         </span>
       ),
     },
     {
       accessorKey: "sourcePublisher",
-      header: "Source",
+      header: "来源",
       cell: (info) => (
         <div className="flex flex-col text-sm text-gray-600 dark:text-gray-300">
           <span>
-            {(info.getValue<string | null>() ?? "Not set").toString()}
+            {(info.getValue<string | null>() ?? "未设置").toString()}
           </span>
           <span className="text-xs text-gray-500">
-            Level: {info.row.original.sourceLevel ?? "—"}
+            级别：{info.row.original.sourceLevel ?? "—"}
           </span>
         </div>
       ),
     },
     {
       accessorKey: "worker",
-      header: "Maintainer",
+      header: "维护者",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
           {(info.getValue<string | null>() ?? "—").toString()}
@@ -91,7 +91,7 @@ export function createPaperColumns(
     },
     {
       id: "actions",
-      header: "Actions",
+      header: "操作",
       cell: (info) => {
         const paper = info.row.original;
         return (

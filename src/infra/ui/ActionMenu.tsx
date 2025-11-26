@@ -52,14 +52,14 @@ export function ActionMenu({
   items,
   onEdit,
   onDelete,
-  ariaLabel = "Actions",
+  ariaLabel = "操作",
 }: ActionMenuProps) {
   const menuItems: ActionMenuItem[] = items ?? [
     ...(onEdit
       ? [
           {
             key: "edit",
-            label: "Edit",
+            label: "编辑",
             icon: <PencilSimple size={18} />,
             onPress: onEdit,
           },
@@ -69,7 +69,7 @@ export function ActionMenu({
       ? [
           {
             key: "delete",
-            label: "Delete",
+            label: "删除",
             icon: <Trash size={18} />,
             color: "danger" as const,
             className: "text-danger",

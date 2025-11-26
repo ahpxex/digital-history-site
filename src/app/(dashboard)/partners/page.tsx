@@ -21,9 +21,9 @@ import {
 } from "@/infra/table";
 
 const partnerFields: FieldConfig[] = [
-  { name: "name", label: "Name", required: true },
+  { name: "name", label: "名称", required: true },
   { name: "logoUrl", label: "Logo URL", type: "url", required: true },
-  { name: "websiteUrl", label: "Website URL", type: "url", required: true },
+  { name: "websiteUrl", label: "网站URL", type: "url", required: true },
 ];
 
 const sanitizeValues = (values: Record<string, any>) =>

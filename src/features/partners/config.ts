@@ -15,7 +15,7 @@ export function createPartnersConfig(
     resource: PARTNERS_RESOURCE,
     columns: createPartnersColumns(context),
     enableSearch: true,
-    searchPlaceholder: "Search partners...",
+    searchPlaceholder: "搜索合作伙伴...",
     defaultPageSize: 10,
     pageSizeOptions: [10, 20, 50],
   };

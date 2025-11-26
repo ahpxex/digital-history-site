@@ -21,22 +21,22 @@ import {
 } from "@/infra/table";
 
 const toolFields: FieldConfig[] = [
-  { name: "name", label: "Name", required: true },
-  { name: "category", label: "Category", required: true },
+  { name: "name", label: "名称", required: true },
+  { name: "category", label: "分类", required: true },
   {
     name: "description",
-    label: "Description",
+    label: "描述",
     type: "textarea",
     required: true,
   },
   {
     name: "developer",
-    label: "Developer",
+    label: "开发者",
     allowNull: true,
   },
   {
     name: "url",
-    label: "Website",
+    label: "网站",
     type: "url",
     allowNull: true,
   },

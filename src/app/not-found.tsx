@@ -14,10 +14,10 @@ export default function NotFound() {
           <div className="text-center space-y-2">
             <h1 className="text-6xl font-bold text-gray-900">404</h1>
             <h2 className="text-2xl font-semibold text-gray-800">
-              Page Not Found
+              页面未找到
             </h2>
             <p className="text-gray-600">
-              The page you are looking for does not exist or has been moved.
+              您要查找的页面不存在或已被移动。
             </p>
           </div>
           <div className="flex gap-3 w-full">
@@ -28,7 +28,7 @@ export default function NotFound() {
               variant="solid"
               className="flex-1"
             >
-              Go Home
+              返回首页
             </Button>
             <Button
               as={Link}
@@ -36,7 +36,7 @@ export default function NotFound() {
               variant="bordered"
               className="flex-1"
             >
-              View Demo
+              查看演示
             </Button>
           </div>
         </CardBody>

@@ -21,19 +21,19 @@ import {
 } from "@/infra/table";
 
 const newsFields: FieldConfig[] = [
-  { name: "title", label: "Title", required: true },
-  { name: "issue", label: "Issue", allowNull: true },
-  { name: "coverUrl", label: "Cover URL", type: "url", allowNull: true },
+  { name: "title", label: "标题", required: true },
+  { name: "issue", label: "期号", allowNull: true },
+  { name: "coverUrl", label: "封面URL", type: "url", allowNull: true },
   {
     name: "description",
-    label: "Description",
+    label: "描述",
     type: "textarea",
     required: true,
   },
-  { name: "link", label: "Link", type: "url", allowNull: true },
+  { name: "link", label: "链接", type: "url", allowNull: true },
   {
     name: "publishDate",
-    label: "Publish Date",
+    label: "发布日期",
     type: "date",
     allowNull: true,
   },

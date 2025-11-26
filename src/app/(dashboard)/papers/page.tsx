@@ -21,32 +21,32 @@ import {
 } from "@/infra/table";
 
 const paperFormFields: FieldConfig[] = [
-  { name: "docTitle", label: "Title", required: true },
-  { name: "author", label: "Author", allowNull: true },
+  { name: "docTitle", label: "标题", required: true },
+  { name: "author", label: "作者", allowNull: true },
   {
     name: "authorAffiliation",
-    label: "Affiliation",
+    label: "隶属关系",
     allowNull: true,
   },
   {
     name: "docAbstract",
-    label: "Abstract",
+    label: "摘要",
     type: "textarea",
     allowNull: true,
   },
   {
     name: "docKeywords",
-    label: "Keywords",
+    label: "关键字",
     allowNull: true,
-    description: "Comma separated keywords",
+    description: "逗号分隔的关键词",
   },
-  { name: "topic", label: "Topic", allowNull: true },
-  { name: "methods", label: "Methods", allowNull: true },
-  { name: "tools", label: "Tools", allowNull: true },
-  { name: "sourcePublisher", label: "Source / Journal", allowNull: true },
-  { name: "sourceLevel", label: "Source Level", allowNull: true },
-  { name: "timePublished", label: "Published At", allowNull: true },
-  { name: "worker", label: "Maintainer", allowNull: true },
+  { name: "topic", label: "话题", allowNull: true },
+  { name: "methods", label: "方法", allowNull: true },
+  { name: "tools", label: "工具", allowNull: true },
+  { name: "sourcePublisher", label: "来源/期刊", allowNull: true },
+  { name: "sourceLevel", label: "来源级别", allowNull: true },
+  { name: "timePublished", label: "发布于", allowNull: true },
+  { name: "worker", label: "维护者", allowNull: true },
 ];
 
 const sanitizeValues = (values: Record<string, any>) =>

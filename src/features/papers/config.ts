@@ -17,28 +17,28 @@ export function createPapersConfig(
     filters: [
       {
         key: "topic",
-        label: "Filter by topic",
-        placeholder: "All topics",
+        label: "按主题筛选",
+        placeholder: "所有主题",
         options: [
-          { key: "Spatial Analytics", label: "Spatial Analytics" },
-          { key: "Semantic Modeling", label: "Semantic Modeling" },
-          { key: "Media Preservation", label: "Media Preservation" },
+          { key: "Spatial Analytics", label: "空间分析" },
+          { key: "Semantic Modeling", label: "语义建模" },
+          { key: "Media Preservation", label: "媒体保存" },
         ],
       },
       {
         key: "method",
-        label: "Filter by method",
-        placeholder: "All methods",
+        label: "按方法筛选",
+        placeholder: "所有方法",
         options: [
-          { key: "GIS", label: "GIS" },
-          { key: "entity extraction", label: "Entity Extraction" },
-          { key: "signal processing", label: "Signal Processing" },
+          { key: "GIS", label: "地理信息系统" },
+          { key: "entity extraction", label: "实体抽取" },
+          { key: "signal processing", label: "信号处理" },
         ],
       },
       {
         key: "tool",
-        label: "Filter by tool",
-        placeholder: "All tools",
+        label: "按工具筛选",
+        placeholder: "所有工具",
         options: [
           { key: "QGIS", label: "QGIS" },
           { key: "Neo4j", label: "Neo4j" },
@@ -47,9 +47,9 @@ export function createPapersConfig(
       },
     ],
     enableSearch: true,
-    searchPlaceholder: "Search papers by title, author, or keywords...",
+    searchPlaceholder: "按标题、作者或关键词搜索论文...",
     defaultPageSize: 10,
     pageSizeOptions: [10, 20, 50],
-    emptyMessage: "No papers found",
+    emptyMessage: "未找到论文",
   };
 }

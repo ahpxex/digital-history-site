@@ -18,7 +18,7 @@ export function createDynamicNewsConfig(
     resource: DYNAMIC_NEWS_RESOURCE,
     columns: createDynamicNewsColumns(context),
     enableSearch: true,
-    searchPlaceholder: "Search news...",
+    searchPlaceholder: "搜索新闻...",
     defaultPageSize: 10,
     pageSizeOptions: [10, 20, 50],
   };

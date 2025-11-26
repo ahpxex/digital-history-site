@@ -14,7 +14,7 @@ export function createFeaturedCasesColumns(
   return [
     {
       accessorKey: "title",
-      header: "Case",
+      header: "案例",
       cell: (info) => (
         <div className="flex flex-col">
           <span className="font-semibold">{info.getValue() as string}</span>
@@ -26,7 +26,7 @@ export function createFeaturedCasesColumns(
     },
     {
       accessorKey: "type",
-      header: "Type",
+      header: "类型",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
           {info.getValue() as string}
@@ -35,7 +35,7 @@ export function createFeaturedCasesColumns(
     },
     {
       accessorKey: "tags",
-      header: "Tags",
+      header: "标签",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
           {info.getValue() as string}
@@ -44,7 +44,7 @@ export function createFeaturedCasesColumns(
     },
     {
       accessorKey: "sortOrder",
-      header: "Sort Order",
+      header: "排序",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
           {info.getValue<number>()}
@@ -53,7 +53,7 @@ export function createFeaturedCasesColumns(
     },
     {
       accessorKey: "url",
-      header: "Link",
+      header: "链接",
       cell: (info) => {
         const url = info.getValue<string>();
         return (
@@ -63,14 +63,14 @@ export function createFeaturedCasesColumns(
             rel="noreferrer"
             className="text-sm text-primary underline"
           >
-            Visit
+            访问
           </Link>
         );
       },
     },
     {
       id: "actions",
-      header: "Actions",
+      header: "操作",
       cell: (info) => {
         const record = info.row.original;
         return (

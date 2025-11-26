@@ -64,7 +64,7 @@ export default function LoginPage() {
         setErrors({
           general:
             response.error?.message ||
-            "Failed to sign in. Please check your credentials.",
+            "登录失败。请检查您的凭据。",
         });
         return;
       }
@@ -74,7 +74,7 @@ export default function LoginPage() {
     } catch (error: any) {
       setErrors({
         general:
-          error?.message || "Failed to sign in. Please check your credentials.",
+          error?.message || "登录失败。请检查您的凭据。",
       });
     }
   };
@@ -82,11 +82,10 @@ export default function LoginPage() {
   return (
     <>
       <div className="flex flex-col space-y-2 justify-center items-center text-center">
-        <h1 className="text-4xl font-bold">Administrator Login</h1>
+        <h1 className="text-4xl font-bold">管理员登录</h1>
         <p className="text-gray-600 max-w-md text-balance">
-          This dashboard is restricted to a single administrator account. Update
-          the <code>ADMIN_EMAIL</code> and <code>ADMIN_PASSWORD</code>{" "}
-          environment variables to customize the credentials.
+          此仪表板仅限单个管理员账户使用。更新<code>ADMIN_EMAIL</code>和<code>ADMIN_PASSWORD</code>{" "}
+          环境变量以自定义凭据。
         </p>
       </div>
       <Card className="w-full max-w-md">
@@ -96,15 +95,15 @@ export default function LoginPage() {
               <Alert
                 color="warning"
                 variant="flat"
-                title="Unable to sign in"
+                title="无法登录"
                 description={errors.general}
               />
             )}
             <Input
               isRequired
               type="email"
-              label="Email"
-              placeholder="Enter your email"
+              label="邮箱"
+              placeholder="输入您的邮箱"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -116,8 +115,8 @@ export default function LoginPage() {
             <Input
               isRequired
               type="password"
-              label="Password"
-              placeholder="Enter your password"
+              label="密码"
+              placeholder="输入您的密码"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -133,7 +132,7 @@ export default function LoginPage() {
               isLoading={isLoading}
               className="w-full"
             >
-              Sign In
+              登录
             </Button>
           </form>
         </CardBody>

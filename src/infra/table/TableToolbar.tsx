@@ -21,7 +21,7 @@ export function TableToolbar({
   enableSearch = true,
   searchValue,
   onSearchChange,
-  searchPlaceholder = "Search...",
+  searchPlaceholder = "搜索...",
   filters = [],
   filterValues = {},
   onFilterChange,
@@ -75,7 +75,7 @@ export function TableToolbar({
           variant="flat"
           onPress={onRefresh}
           isLoading={isLoading}
-          aria-label="Refresh"
+          aria-label="刷新"
         >
           <ArrowClockwise size={20} />
         </Button>

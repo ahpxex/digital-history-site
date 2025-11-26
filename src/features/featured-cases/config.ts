@@ -20,17 +20,17 @@ export function createFeaturedCasesConfig(
     filters: [
       {
         key: "type",
-        label: "Case type",
-        placeholder: "All types",
+        label: "案例类型",
+        placeholder: "所有类型",
         options: [
-          { key: "Visualization", label: "Visualization" },
-          { key: "Archive", label: "Archive" },
-          { key: "Analysis", label: "Analysis" },
+          { key: "Visualization", label: "可视化" },
+          { key: "Archive", label: "档案" },
+          { key: "Analysis", label: "分析" },
         ],
       },
     ],
     enableSearch: true,
-    searchPlaceholder: "Search cases...",
+    searchPlaceholder: "搜索案例...",
     defaultPageSize: 10,
     pageSizeOptions: [10, 20, 50],
   };

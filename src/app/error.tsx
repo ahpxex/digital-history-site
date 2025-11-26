@@ -29,15 +29,14 @@ export default function Error({
           <div className="text-center space-y-2">
             <h1 className="text-6xl font-bold text-gray-900">500</h1>
             <h2 className="text-2xl font-semibold text-gray-800">
-              Something Went Wrong
+              出错了
             </h2>
             <p className="text-gray-600">
-              An unexpected error occurred. Please try again or contact support
-              if the problem persists.
+              发生了意外错误。请重试，如果问题仍然存在，请联系支持。
             </p>
             {error.digest && (
               <p className="text-sm text-gray-500 font-mono">
-                Error ID: {error.digest}
+                错误ID：{error.digest}
               </p>
             )}
           </div>
@@ -48,14 +47,14 @@ export default function Error({
               variant="solid"
               className="flex-1"
             >
-              Try Again
+              重试
             </Button>
             <Button
               onClick={() => (window.location.href = "/")}
               variant="bordered"
               className="flex-1"
             >
-              Go Home
+              返回首页
             </Button>
           </div>
         </CardBody>

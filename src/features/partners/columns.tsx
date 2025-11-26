@@ -15,7 +15,7 @@ export function createPartnersColumns(
   return [
     {
       accessorKey: "name",
-      header: "Partner",
+      header: "合作伙伴",
       cell: (info) => {
         const partner = info.row.original;
         return (
@@ -43,7 +43,7 @@ export function createPartnersColumns(
     },
     {
       accessorKey: "websiteUrl",
-      header: "Website",
+      header: "网站",
       cell: (info) => (
         <Link
           href={info.getValue() as string}
@@ -51,13 +51,13 @@ export function createPartnersColumns(
           rel="noreferrer"
           className="text-sm text-primary underline"
         >
-          Visit
+          访问
         </Link>
       ),
     },
     {
       id: "actions",
-      header: "Actions",
+      header: "操作",
       cell: (info) => {
         const partner = info.row.original;
         return (

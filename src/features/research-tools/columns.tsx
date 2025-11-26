@@ -14,7 +14,7 @@ export function createResearchToolsColumns(
   return [
     {
       accessorKey: "name",
-      header: "Name",
+      header: "名称",
       cell: (info) => (
         <div className="flex flex-col">
           <span className="font-semibold text-gray-900 dark:text-gray-100">
@@ -28,7 +28,7 @@ export function createResearchToolsColumns(
     },
     {
       accessorKey: "description",
-      header: "Description",
+      header: "描述",
       cell: (info) => (
         <p className="text-sm text-gray-600 dark:text-gray-300">
           {info.getValue() as string}
@@ -37,7 +37,7 @@ export function createResearchToolsColumns(
     },
     {
       accessorKey: "developer",
-      header: "Developer",
+      header: "开发者",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
           {(info.getValue<string | null>() ?? "—").toString()}
@@ -46,7 +46,7 @@ export function createResearchToolsColumns(
     },
     {
       accessorKey: "url",
-      header: "Website",
+      header: "网站",
       cell: (info) => {
         const value = info.getValue<string | null>();
         if (!value) return <span className="text-sm text-gray-400">—</span>;
@@ -57,14 +57,14 @@ export function createResearchToolsColumns(
             rel="noreferrer"
             className="text-sm text-primary underline"
           >
-            Visit
+            访问
           </Link>
         );
       },
     },
     {
       id: "actions",
-      header: "Actions",
+      header: "操作",
       cell: (info) => {
         const record = info.row.original;
         return (

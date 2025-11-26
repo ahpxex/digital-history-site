@@ -21,19 +21,19 @@ export function createDynamicNewsColumns(
   return [
     {
       accessorKey: "title",
-      header: "Title",
+      header: "标题",
       cell: (info) => (
         <div className="flex flex-col">
           <span className="font-semibold">{info.getValue() as string}</span>
           <span className="text-xs text-gray-500">
-            Issue: {info.row.original.issue ?? "—"}
+            期号：{info.row.original.issue ?? "—"}
           </span>
         </div>
       ),
     },
     {
       accessorKey: "publishDate",
-      header: "Publish Date",
+      header: "发布日期",
       cell: (info) => (
         <span className="text-sm text-gray-600 dark:text-gray-300">
           {formatDate(info.getValue() as string)}
@@ -42,7 +42,7 @@ export function createDynamicNewsColumns(
     },
     {
       accessorKey: "description",
-      header: "Description",
+      header: "描述",
       cell: (info) => (
         <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
           {info.getValue() as string}
@@ -51,7 +51,7 @@ export function createDynamicNewsColumns(
     },
     {
       accessorKey: "link",
-      header: "Link",
+      header: "链接",
       cell: (info) => {
         const value = info.getValue<string | null>();
         if (!value) return <span className="text-sm text-gray-400">—</span>;
@@ -62,14 +62,14 @@ export function createDynamicNewsColumns(
             rel="noreferrer"
             className="text-sm text-primary underline"
           >
-            Open
+            打开
           </Link>
         );
       },
     },
     {
       id: "actions",
-      header: "Actions",
+      header: "操作",
       cell: (info) => {
         const record = info.row.original;
         return (

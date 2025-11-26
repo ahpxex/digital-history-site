@@ -20,16 +20,16 @@ export function createDatasetChartDataConfig(
     filters: [
       {
         key: "chartType",
-        label: "Chart type",
-        placeholder: "All chart types",
+        label: "图表类型",
+        placeholder: "所有图表类型",
         options: [
-          { key: "datasetsByType", label: "Datasets by Type" },
-          { key: "institutions", label: "Institutions" },
+          { key: "datasetsByType", label: "按类型分类的数据集" },
+          { key: "institutions", label: "机构" },
         ],
       },
     ],
     enableSearch: true,
-    searchPlaceholder: "Search chart data...",
+    searchPlaceholder: "搜索图表数据...",
     defaultPageSize: 10,
     pageSizeOptions: [10, 20, 50],
   };
