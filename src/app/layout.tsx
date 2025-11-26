@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { CommandMenuProvider } from "@/components/CommandMenuProvider";
 import { Providers } from "./providers";
 
 // Opt-out of static generation for all pages
@@ -33,9 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-foreground bg-background`}
       >
-        <Providers>
-          <CommandMenuProvider>{children}</CommandMenuProvider>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

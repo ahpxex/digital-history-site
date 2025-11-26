@@ -1,14 +1,7 @@
 import type { Icon } from "@phosphor-icons/react";
 
 import {
-  BellIcon,
-  CalendarIcon,
-  GearIcon,
-  HouseIcon,
   TableIcon,
-  TextboxIcon,
-  UserIcon,
-  WarningIcon,
 } from "@phosphor-icons/react";
 
 export interface MenuItem {
@@ -24,9 +17,6 @@ export interface MenuGroup {
 
 export const mainMenuItems: MenuGroup[] = [
   {
-    items: [{ label: "Dashboard", href: "/", icon: HouseIcon }],
-  },
-  {
     groupLabel: "Table",
     items: [
       { label: "Simple", href: "/tables/simple", icon: TableIcon },
@@ -36,43 +26,6 @@ export const mainMenuItems: MenuGroup[] = [
       { label: "Selectables", href: "/tables/selectables", icon: TableIcon },
     ],
   },
-  {
-    groupLabel: "Forms",
-    items: [
-      {
-        label: "User & Profile",
-        href: "/forms/user-profile",
-        icon: TextboxIcon,
-      },
-      {
-        label: "Data Management",
-        href: "/forms/data-management",
-        icon: TextboxIcon,
-      },
-      {
-        label: "Settings & Config",
-        href: "/forms/settings-config",
-        icon: TextboxIcon,
-      },
-      {
-        label: "Interaction & Filtering",
-        href: "/forms/interaction-filtering",
-        icon: TextboxIcon,
-      },
-    ],
-  },
-  {
-    groupLabel: "Error Pages",
-    items: [
-      { label: "Unauthorized", href: "/errors/401", icon: WarningIcon },
-      { label: "Forbidden", href: "/errors/403", icon: WarningIcon },
-      { label: "Not Found", href: "/errors/404", icon: WarningIcon },
-      { label: "Server Error", href: "/errors/500", icon: WarningIcon },
-      { label: "Maintenance", href: "/errors/503", icon: WarningIcon },
-    ],
-  },
 ];
 
-export const bottomMenuItems: MenuItem[] = [
-  { label: "Settings", href: "/settings", icon: GearIcon },
-];
+export const bottomMenuItems: MenuItem[] = [];

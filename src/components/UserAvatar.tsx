@@ -11,11 +11,7 @@ import {
   Spinner,
 } from "@heroui/react";
 import {
-  BellIcon,
-  GearIcon,
-  MoonIcon,
   SignOutIcon,
-  UserIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { useGetIdentity, useLogout } from "@refinedev/core";
 import { useRouter } from "next/navigation";
@@ -48,18 +44,6 @@ export function UserAvatar() {
 
   const handleAction = async (key: Key) => {
     switch (key) {
-      case "profile":
-        router.push("/profile");
-        break;
-      case "settings":
-        router.push("/settings");
-        break;
-      case "notifications":
-        router.push("/notifications");
-        break;
-      case "theme":
-        // Toggle theme logic here
-        break;
       case "logout":
         try {
           setIsSigningOut(true);
@@ -115,38 +99,6 @@ export function UserAvatar() {
         onAction={handleAction}
         variant="flat"
       >
-        <DropdownSection title="Account" showDivider>
-          <DropdownItem
-            key="profile"
-            description="View your profile"
-            startContent={<UserIcon size={20} />}
-          >
-            Profile
-          </DropdownItem>
-          <DropdownItem
-            key="settings"
-            description="Manage your settings"
-            startContent={<GearIcon size={20} />}
-          >
-            Settings
-          </DropdownItem>
-          <DropdownItem
-            key="notifications"
-            description="View notifications"
-            startContent={<BellIcon size={20} />}
-          >
-            Notifications
-          </DropdownItem>
-        </DropdownSection>
-        <DropdownSection title="Preferences" showDivider>
-          <DropdownItem
-            key="theme"
-            description="Toggle dark mode"
-            startContent={<MoonIcon size={20} />}
-          >
-            Theme
-          </DropdownItem>
-        </DropdownSection>
         <DropdownSection>
           <DropdownItem
             key="logout"
