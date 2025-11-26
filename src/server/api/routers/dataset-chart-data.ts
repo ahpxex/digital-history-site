@@ -16,6 +16,7 @@ const chartBaseInput = z.object({
   value: z.number().int().min(0),
 });
 
+const chartCreateInput = chartBaseInput.partial();
 const chartUpdateInput = chartBaseInput.partial();
 
 const chartListInput = baseListInput.extend({
@@ -29,8 +30,8 @@ export const datasetChartDataRouter = createTRPCRouter({
 
     if (input.search) {
       where.OR = [
-        { chartType: { contains: input.search, mode: "insensitive" } },
-        { label: { contains: input.search, mode: "insensitive" } },
+        { chartType: { contains: input.search } },
+        { label: { contains: input.search } },
       ];
     }
 
@@ -61,9 +62,11 @@ export const datasetChartDataRouter = createTRPCRouter({
     }),
 
   create: publicProcedure
-    .input(chartBaseInput)
+    .input(chartCreateInput)
     .mutation(async ({ ctx, input }) => {
-      return ctx.prisma.datasetChartData.create({ data: input });
+      return ctx.prisma.datasetChartData.create({
+        data: Object.fromEntries(Object.entries(input).filter(([, v]) => v !== undefined)) as any
+      });
     }),
 
   update: publicProcedure

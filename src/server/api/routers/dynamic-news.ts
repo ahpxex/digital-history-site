@@ -23,6 +23,7 @@ const newsBaseInput = z.object({
   publishDate: dateValue.optional(),
 });
 
+const newsCreateInput = newsBaseInput.partial();
 const newsUpdateInput = newsBaseInput.partial();
 
 export const dynamicNewsRouter = createTRPCRouter({
@@ -32,9 +33,9 @@ export const dynamicNewsRouter = createTRPCRouter({
 
     if (input.search) {
       where.OR = [
-        { title: { contains: input.search, mode: "insensitive" } },
-        { issue: { contains: input.search, mode: "insensitive" } },
-        { description: { contains: input.search, mode: "insensitive" } },
+        { title: { contains: input.search } },
+        { issue: { contains: input.search } },
+        { description: { contains: input.search } },
       ];
     }
 
@@ -61,13 +62,13 @@ export const dynamicNewsRouter = createTRPCRouter({
     }),
 
   create: publicProcedure
-    .input(newsBaseInput)
+    .input(newsCreateInput)
     .mutation(async ({ ctx, input }) => {
       return ctx.prisma.dynamicNews.create({
-        data: {
+        data: Object.fromEntries(Object.entries({
           ...input,
           publishDate: input.publishDate ?? undefined,
-        },
+        }).filter(([, v]) => v !== undefined)) as any
       });
     }),
 

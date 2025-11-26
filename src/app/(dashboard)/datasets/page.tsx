@@ -50,9 +50,9 @@ export default function DatasetItemsPage() {
   const [editingItem, setEditingItem] = useState<DatasetItem | null>(null);
   const [initialValues, setInitialValues] = useState<Record<string, any>>({});
 
-  const { mutateAsync: createItem, isLoading: isCreating } =
+  const { mutateAsync: createItem, mutation: createMutation } =
     useCreate<DatasetItem>();
-  const { mutateAsync: updateItem, isLoading: isUpdating } =
+  const { mutateAsync: updateItem, mutation: updateMutation } =
     useUpdate<DatasetItem>();
   const { mutateAsync: deleteItem } = useDelete();
 
@@ -159,7 +159,7 @@ export default function DatasetItemsPage() {
         fields={datasetFields}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        isSubmitting={isCreating || isUpdating}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
         primaryActionLabel={editingItem ? "保存修改" : "创建"}
       />
     </TablePage>

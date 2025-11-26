@@ -60,9 +60,9 @@ export default function PapersPage() {
   const [editingPaper, setEditingPaper] = useState<Paper | null>(null);
   const [initialValues, setInitialValues] = useState<Record<string, any>>({});
 
-  const { mutateAsync: createPaper, isLoading: isCreating } =
+  const { mutateAsync: createPaper, mutation: createMutation } =
     useCreate<Paper>();
-  const { mutateAsync: updatePaper, isLoading: isUpdating } =
+  const { mutateAsync: updatePaper, mutation: updateMutation } =
     useUpdate<Paper>();
   const { mutateAsync: deletePaper } = useDelete();
 
@@ -172,7 +172,7 @@ export default function PapersPage() {
         fields={paperFormFields}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        isSubmitting={isCreating || isUpdating}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
         primaryActionLabel={editingPaper ? "保存修改" : "创建"}
       />
     </TablePage>

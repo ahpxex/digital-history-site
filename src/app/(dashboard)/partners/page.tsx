@@ -47,9 +47,9 @@ export default function PartnersPage() {
   const [editingPartner, setEditingPartner] = useState<Partner | null>(null);
   const [initialValues, setInitialValues] = useState<Record<string, any>>({});
 
-  const { mutateAsync: createPartner, isLoading: isCreating } =
+  const { mutateAsync: createPartner, mutation: createMutation } =
     useCreate<Partner>();
-  const { mutateAsync: updatePartner, isLoading: isUpdating } =
+  const { mutateAsync: updatePartner, mutation: updateMutation } =
     useUpdate<Partner>();
   const { mutateAsync: deletePartner } = useDelete();
 
@@ -153,7 +153,7 @@ export default function PartnersPage() {
         fields={partnerFields}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        isSubmitting={isCreating || isUpdating}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
         primaryActionLabel={editingPartner ? "保存修改" : "创建"}
       />
     </TablePage>

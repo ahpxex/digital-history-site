@@ -5,6 +5,12 @@ import type { Paper } from "./types";
 
 const PAPERS_RESOURCE = "papers";
 
+const normalizePaper = (paper: any): Paper => ({
+  ...paper,
+  createdAt: paper.createdAt instanceof Date ? paper.createdAt : new Date(paper.createdAt),
+  updatedAt: paper.updatedAt instanceof Date ? paper.updatedAt : new Date(paper.updatedAt),
+});
+
 export const papersHandlers: ResourceHandlers<Paper> = {
   list: async ({ pagination, filters, sorters }) => {
     const filterMap = extractFilterMap(filters);
@@ -20,22 +26,25 @@ export const papersHandlers: ResourceHandlers<Paper> = {
       sortOrder: sorter?.order,
     });
 
-    return response;
+    return {
+      ...response,
+      data: response.data.map(normalizePaper),
+    };
   },
 
   getOne: async (id) => {
     const data = await trpc.papers.getById.query({ id });
-    return { data };
+    return { data: normalizePaper(data) };
   },
 
   create: async (variables) => {
     const data = await trpc.papers.create.mutate(variables);
-    return { data };
+    return { data: normalizePaper(data) };
   },
 
   update: async (id, variables) => {
     const data = await trpc.papers.update.mutate({ id, data: variables });
-    return { data };
+    return { data: normalizePaper(data) };
   },
 
   deleteOne: async (id) => {

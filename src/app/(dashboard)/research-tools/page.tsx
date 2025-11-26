@@ -53,9 +53,9 @@ export default function ResearchToolsPage() {
   const [editingTool, setEditingTool] = useState<ResearchTool | null>(null);
   const [initialValues, setInitialValues] = useState<Record<string, any>>({});
 
-  const { mutateAsync: createTool, isLoading: isCreating } =
+  const { mutateAsync: createTool, mutation: createMutation } =
     useCreate<ResearchTool>();
-  const { mutateAsync: updateTool, isLoading: isUpdating } =
+  const { mutateAsync: updateTool, mutation: updateMutation } =
     useUpdate<ResearchTool>();
   const { mutateAsync: deleteTool } = useDelete();
 
@@ -161,7 +161,7 @@ export default function ResearchToolsPage() {
         fields={toolFields}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        isSubmitting={isCreating || isUpdating}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
         primaryActionLabel={editingTool ? "保存修改" : "创建"}
       />
     </TablePage>

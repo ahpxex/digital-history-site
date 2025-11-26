@@ -24,6 +24,7 @@ const partnerBaseInput = z.object({
   websiteUrl: z.string().trim().url(),
 });
 
+const partnerCreateInput = partnerBaseInput.partial();
 const partnerUpdateInput = partnerBaseInput.partial();
 
 export const partnersRouter = createTRPCRouter({
@@ -33,8 +34,8 @@ export const partnersRouter = createTRPCRouter({
 
     if (input.search) {
       where.OR = [
-        { name: { contains: input.search, mode: "insensitive" } },
-        { websiteUrl: { contains: input.search, mode: "insensitive" } },
+        { name: { contains: input.search } },
+        { websiteUrl: { contains: input.search } },
       ];
     }
 
@@ -61,9 +62,11 @@ export const partnersRouter = createTRPCRouter({
     }),
 
   create: publicProcedure
-    .input(partnerBaseInput)
+    .input(partnerCreateInput)
     .mutation(async ({ ctx, input }) => {
-      return ctx.prisma.partner.create({ data: input });
+      return ctx.prisma.partner.create({
+        data: Object.fromEntries(Object.entries(input).filter(([, v]) => v !== undefined)) as any
+      });
     }),
 
   update: publicProcedure

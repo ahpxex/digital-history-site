@@ -18,7 +18,7 @@ const researchToolBaseInput = z.object({
   url: z.string().trim().url().nullish(),
 });
 
-const researchToolCreateInput = researchToolBaseInput;
+const researchToolCreateInput = researchToolBaseInput.partial();
 const researchToolUpdateInput = researchToolBaseInput.partial();
 
 const researchToolListInput = baseListInput.extend({
@@ -34,10 +34,10 @@ export const researchToolsRouter = createTRPCRouter({
 
       if (input.search) {
         where.OR = [
-          { name: { contains: input.search, mode: "insensitive" } },
-          { category: { contains: input.search, mode: "insensitive" } },
-          { description: { contains: input.search, mode: "insensitive" } },
-          { developer: { contains: input.search, mode: "insensitive" } },
+          { name: { contains: input.search } },
+          { category: { contains: input.search } },
+          { description: { contains: input.search } },
+          { developer: { contains: input.search } },
         ];
       }
 
@@ -70,7 +70,9 @@ export const researchToolsRouter = createTRPCRouter({
   create: publicProcedure
     .input(researchToolCreateInput)
     .mutation(async ({ ctx, input }) => {
-      return ctx.prisma.researchTool.create({ data: input });
+      return ctx.prisma.researchTool.create({
+        data: Object.fromEntries(Object.entries(input).filter(([, v]) => v !== undefined)) as any
+      });
     }),
 
   update: publicProcedure

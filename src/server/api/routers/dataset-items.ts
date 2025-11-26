@@ -19,7 +19,7 @@ const datasetBaseInput = z.object({
   institution: z.string().trim().min(1).max(255),
 });
 
-const datasetCreateInput = datasetBaseInput;
+const datasetCreateInput = datasetBaseInput.partial();
 const datasetUpdateInput = datasetBaseInput.partial();
 
 const datasetListInput = baseListInput.extend({
@@ -35,10 +35,10 @@ export const datasetItemsRouter = createTRPCRouter({
 
       if (input.search) {
         where.OR = [
-          { title: { contains: input.search, mode: "insensitive" } },
-          { description: { contains: input.search, mode: "insensitive" } },
-          { tags: { contains: input.search, mode: "insensitive" } },
-          { institution: { contains: input.search, mode: "insensitive" } },
+          { title: { contains: input.search } },
+          { description: { contains: input.search } },
+          { tags: { contains: input.search } },
+          { institution: { contains: input.search } },
         ];
       }
 
@@ -71,7 +71,9 @@ export const datasetItemsRouter = createTRPCRouter({
   create: publicProcedure
     .input(datasetCreateInput)
     .mutation(async ({ ctx, input }) => {
-      return ctx.prisma.datasetItem.create({ data: input });
+      return ctx.prisma.datasetItem.create({
+        data: Object.fromEntries(Object.entries(input).filter(([, v]) => v !== undefined)) as any
+      });
     }),
 
   update: publicProcedure

@@ -56,9 +56,9 @@ export default function FeaturedCasesPage() {
   const [editingCase, setEditingCase] = useState<FeaturedCase | null>(null);
   const [initialValues, setInitialValues] = useState<Record<string, any>>({});
 
-  const { mutateAsync: createCase, isLoading: isCreating } =
+  const { mutateAsync: createCase, mutation: createMutation } =
     useCreate<FeaturedCase>();
-  const { mutateAsync: updateCase, isLoading: isUpdating } =
+  const { mutateAsync: updateCase, mutation: updateMutation } =
     useUpdate<FeaturedCase>();
   const { mutateAsync: deleteCase } = useDelete();
 
@@ -166,7 +166,7 @@ export default function FeaturedCasesPage() {
         fields={caseFields}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        isSubmitting={isCreating || isUpdating}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
         primaryActionLabel={editingCase ? "保存修改" : "创建"}
       />
     </TablePage>

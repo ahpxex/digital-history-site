@@ -50,9 +50,9 @@ export default function DynamicNewsPage() {
   const [editingNews, setEditingNews] = useState<DynamicNews | null>(null);
   const [initialValues, setInitialValues] = useState<Record<string, any>>({});
 
-  const { mutateAsync: createNews, isLoading: isCreating } =
+  const { mutateAsync: createNews, mutation: createMutation } =
     useCreate<DynamicNews>();
-  const { mutateAsync: updateNews, isLoading: isUpdating } =
+  const { mutateAsync: updateNews, mutation: updateMutation } =
     useUpdate<DynamicNews>();
   const { mutateAsync: deleteNews } = useDelete();
 
@@ -159,7 +159,7 @@ export default function DynamicNewsPage() {
         fields={newsFields}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        isSubmitting={isCreating || isUpdating}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
         primaryActionLabel={editingNews ? "保存修改" : "创建"}
       />
     </TablePage>

@@ -36,9 +36,9 @@ const paperCreateInput = z.object({
   sourceLevel: optionalShort,
   timePublished: optionalShort,
   worker: optionalShort,
-});
+}).partial();
 
-const paperUpdateInput = paperCreateInput.partial();
+const paperUpdateInput = paperCreateInput;
 
 const paperListInput = baseListInput.extend({
   topic: z.string().optional(),
@@ -53,23 +53,23 @@ export const papersRouter = createTRPCRouter({
 
     if (input.search) {
       where.OR = [
-        { docTitle: { contains: input.search, mode: "insensitive" } },
-        { author: { contains: input.search, mode: "insensitive" } },
-        { docKeywords: { contains: input.search, mode: "insensitive" } },
-        { topic: { contains: input.search, mode: "insensitive" } },
+        { docTitle: { contains: input.search } },
+        { author: { contains: input.search } },
+        { docKeywords: { contains: input.search } },
+        { topic: { contains: input.search } },
       ];
     }
 
     if (input.topic) {
-      where.topic = { contains: input.topic, mode: "insensitive" };
+      where.topic = { contains: input.topic };
     }
 
     if (input.method) {
-      where.methods = { contains: input.method, mode: "insensitive" };
+      where.methods = { contains: input.method };
     }
 
     if (input.tool) {
-      where.tools = { contains: input.tool, mode: "insensitive" };
+      where.tools = { contains: input.tool };
     }
 
     const orderBy = buildOrderBy({
@@ -103,7 +103,8 @@ export const papersRouter = createTRPCRouter({
   create: publicProcedure
     .input(paperCreateInput)
     .mutation(async ({ ctx, input }) => {
-      const paper = await ctx.prisma.paper.create({ data: input });
+      const data = Object.fromEntries(Object.entries(input).filter(([, v]) => v !== undefined)) as any;
+      const paper = await ctx.prisma.paper.create({ data });
       return paper;
     }),
 

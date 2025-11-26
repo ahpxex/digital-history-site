@@ -39,9 +39,9 @@ export default function DatasetChartDataPage() {
   );
   const [initialValues, setInitialValues] = useState<Record<string, any>>({});
 
-  const { mutateAsync: createEntry, isLoading: isCreating } =
+  const { mutateAsync: createEntry, mutation: createMutation } =
     useCreate<DatasetChartData>();
-  const { mutateAsync: updateEntry, isLoading: isUpdating } =
+  const { mutateAsync: updateEntry, mutation: updateMutation } =
     useUpdate<DatasetChartData>();
   const { mutateAsync: deleteEntry } = useDelete();
 
@@ -145,7 +145,7 @@ export default function DatasetChartDataPage() {
         fields={chartFields}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        isSubmitting={isCreating || isUpdating}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
         primaryActionLabel={editingEntry ? "保存修改" : "创建"}
       />
     </TablePage>
