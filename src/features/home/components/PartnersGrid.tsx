@@ -13,7 +13,7 @@ export function PartnersGrid({ partners }: { partners: Partner[] }) {
     if (!partners?.length) {
         return (
           <div className="w-full text-center py-20 text-default-400">
-            No partners found.
+            暂无合作机构。
           </div>
         );
     }

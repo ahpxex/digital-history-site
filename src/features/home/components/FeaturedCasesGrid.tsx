@@ -18,7 +18,7 @@ export function FeaturedCasesGrid({ cases }: { cases: FeaturedCase[] }) {
   if (!cases?.length) {
     return (
       <div className="w-full text-center py-20 text-default-400">
-        No featured cases found.
+        暂无精选案例。
       </div>
     );
   }

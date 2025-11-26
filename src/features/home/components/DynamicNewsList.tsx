@@ -16,7 +16,7 @@ export function DynamicNewsList({ news }: { news: NewsItem[] }) {
     if (!news?.length) {
       return (
         <div className="w-full text-center py-20 text-default-400">
-          No news found.
+          暂无动态。
         </div>
       );
     }
@@ -43,7 +43,7 @@ export function DynamicNewsList({ news }: { news: NewsItem[] }) {
                     <CardBody className="p-0 space-y-3">
                         <div className="flex justify-between items-center">
                              <span className="text-xs font-bold text-primary uppercase tracking-wider">
-                                {item.issue || "Update"}
+                                {item.issue || "动态更新"}
                              </span>
                              {item.publishDate && (
                                 <span className="text-xs text-default-400 font-medium">
@@ -65,7 +65,7 @@ export function DynamicNewsList({ news }: { news: NewsItem[] }) {
                     <CardFooter className="p-0 pt-4">
                         {item.link && (
                             <Link href={item.link} isExternal size="sm" className="font-semibold text-primary hover:text-primary/80">
-                                Read More &rarr;
+                                阅读全文 &rarr;
                             </Link>
                         )}
                     </CardFooter>

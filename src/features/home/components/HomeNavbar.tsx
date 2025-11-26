@@ -16,12 +16,20 @@ export function HomeNavbar() {
 
   const navItems = [
     { label: "首页", href: "/" },
-    { label: "精选案例", href: "/featured-cases" },
-    { label: "研究工具", href: "/research-tools" },
-    { label: "数据集", href: "/datasets" },
-    { label: "发展动态", href: "/dynamic-news" },
-    { label: "合作机构", href: "/partners" },
+    { label: "精选案例", href: "/#featured-cases" },
+    { label: "研究工具", href: "/#research-tools" },
+    { label: "数据集", href: "/#datasets" },
+    { label: "发展动态", href: "/#dynamic-news" },
+    { label: "合作机构", href: "/#partners" },
+    { label: "高级搜索", href: "/advanced-search" },
   ];
+
+  const isActive = (href: string) => {
+    if (href.startsWith("/#")) {
+      return false;
+    }
+    return pathname === href;
+  };
 
   return (
     <Navbar 
@@ -44,13 +52,13 @@ export function HomeNavbar() {
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-8" justify="center">
         {navItems.map((item) => (
-          <NavbarItem key={item.href} isActive={pathname === item.href}>
+          <NavbarItem key={item.href} isActive={isActive(item.href)}>
             <Link
               as={NextLink}
               href={item.href}
-              color={pathname === item.href ? "primary" : "foreground"}
+              color={isActive(item.href) ? "primary" : "foreground"}
               className={`text-sm font-medium transition-colors ${
-                pathname === item.href ? "font-semibold" : "text-default-600 hover:text-default-900"
+                isActive(item.href) ? "font-semibold" : "text-default-600 hover:text-default-900"
               }`}
             >
               {item.label}

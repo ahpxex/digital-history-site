@@ -17,7 +17,7 @@ export function DatasetList({ datasets }: { datasets: DatasetItem[] }) {
     if (!datasets?.length) {
       return (
         <div className="w-full text-center py-20 text-default-400">
-          No datasets found.
+          暂无数据集。
         </div>
       );
     }
@@ -48,7 +48,7 @@ export function DatasetList({ datasets }: { datasets: DatasetItem[] }) {
                         </div>
                         <div className="flex-shrink-0 pt-2 md:pt-0">
                              <Button as={Link} href={item.url} isExternal size="sm" variant="bordered" className="font-medium border-default-300 text-default-600">
-                                Access Data
+                                访问数据
                              </Button>
                         </div>
                     </CardBody>

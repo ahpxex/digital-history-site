@@ -16,7 +16,7 @@ export function ResearchToolsList({ tools }: { tools: ResearchTool[] }) {
   if (!tools?.length) {
     return (
       <div className="w-full text-center py-20 text-default-400">
-        No research tools found.
+        暂无研究工具。
       </div>
     );
   }
@@ -41,7 +41,7 @@ export function ResearchToolsList({ tools }: { tools: ResearchTool[] }) {
              <p className="text-default-500 text-sm leading-relaxed max-w-3xl">{tool.description}</p>
              {tool.developer && (
                 <div className="text-xs text-default-400 mt-2">
-                    Developer: <span className="font-medium text-default-600">{tool.developer}</span>
+                    开发者: <span className="font-medium text-default-600">{tool.developer}</span>
                 </div>
              )}
           </div>
@@ -57,7 +57,7 @@ export function ResearchToolsList({ tools }: { tools: ResearchTool[] }) {
                     radius="full"
                     className="font-medium"
                 >
-                    Visit Tool
+                    访问工具
                 </Button>
              )}
           </div>
